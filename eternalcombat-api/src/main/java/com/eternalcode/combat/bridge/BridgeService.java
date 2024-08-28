@@ -18,6 +18,7 @@ public class BridgeService {
     private final PluginManager pluginManager;
     private final Logger logger;
     private final Plugin plugin;
+    private final Server server;
 
     private RegionProvider regionProvider;
 
@@ -26,11 +27,16 @@ public class BridgeService {
         this.pluginManager = pluginManager;
         this.logger = logger;
         this.plugin = plugin;
+        this.server = plugin.getServer();
     }
 
     public void init(FightManager fightManager, Server server) {
         this.initialize("WorldGuard",
-            () -> this.regionProvider = new WorldGuardRegionProvider(this.pluginConfig.settings.blockedRegions),
+            () -> this.regionProvider = new WorldGuardRegionProvider(this.pluginConfig.settings.blockedRegions,
+                this.pluginConfig.settings.blockRegionsWithPvpFlag,
+                this.pluginConfig.settings.worlds,
+                this.server
+            ),
             () -> {
             this.regionProvider = new DefaultRegionProvider(this.pluginConfig.settings.blockedRegionRadius);
 

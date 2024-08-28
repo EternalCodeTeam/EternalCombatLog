@@ -46,6 +46,16 @@ public class PluginConfig extends OkaeriConfig {
         @Comment("# List of regions to block")
         public List<String> blockedRegions = Collections.singletonList("your_region");
 
+        @Comment("# Should EternalCombat block regions with PVP flag set to deny")
+        public boolean blockRegionsWithPvpFlag = true;
+
+        @Comment("# List of worlds affected by blockRegionsWithPvpFlag")
+        public List<String> worlds = List.of(
+            "world",
+            "world_nether",
+            "world_the_end"
+        );
+
         @Comment("# Set the knock multiplier for the blocked region")
         public double blockedRegionKnockMultiplier = 1.2;
 
